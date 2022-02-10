@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <header class="bg-black">
+        <nav class="navbar container navbar-expand-lg navbar-dark">
+            <a href="#" class="navbar-brand">Bar do Gui<i class="bi bi-cup"></i></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container mt-4">
+        <div class="d-flex justify-content-between">
+            <h1>Lista de Usuários</h1>
+            <form action="/users/search" class="d-flex justify-content-around align-items-center" method="get">
+                <input type="text" name="key" class="form-control" placeholder="Pesquise um usuario">
+                <button type="submit" class="ml-3 btn btn-success">Buscar</button>
+            </form>
+        </div>
+        <h1>Bem vindo</h1>
+        <table class="table">
+            <tr>
+                <thead>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Ação</th>
+                </thead>
+                <tbody>
+                    <% users.forEach(user => { %>
+                    <tr>
+                        <th scope="row"><%= user.id_usuario %></th>
+                        <th><%= user.nome %> </th>
+                        <th><%= user.email %> </th>
+                        <th>
+                            <a href="/users/ver/<%= user.id_usuario%>" class="btn btn-primary">Ver Dados</a>
+                            <a href="/users/editar/<%= user.id_usuario%>" class="btn btn-warning">Editar Dados</a>
+                            <a href="/users/delete/<%= user.id_usuario%>" class="btn btn-danger">Deletar Usuário</a>
+                        
+                        </th>
+                    </tr>
+                    <% }) %>
+                </tbody>
+            </tr>            
+        </table>
+
+        <nav aria-label="Page navegation example">
+            <ul class="pagination">
+                <% for( let nrPagina = 1; nrPagina <= totalPagina; nrPagina++ ) { %>
+                    <li class="page-item"><a href="?page=<%=nrPagina%> " class="page-link"><%= nrPagina %></a></li>
+                <% } %>
+                   
+            </ul>
+        </nav>
+    </main>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="../javascripts/cadastroCEP.js"></script>
+</html>
